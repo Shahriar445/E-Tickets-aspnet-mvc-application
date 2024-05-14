@@ -1,7 +1,29 @@
+using E_Tickets.Data;
+using E_Tickets.Data.Services;
+using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
+
+
+
+//Services configuration 
+builder.Services.AddScoped<IActorsService, ActorsService>();
+
+
+
+
+
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
+//db context configurations 
+builder.Services.AddDbContext<AppDbContext>(options => 
+options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionsString")));
+
+
+
 
 var app = builder.Build();
 
@@ -24,4 +46,10 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+
+//Seed database
+AppDbInitialzer.Seed(app);
+
+
 app.Run();
+

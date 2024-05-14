@@ -1,0 +1,76 @@
+﻿@model ActorCreateViewModel
+@{
+    ViewData["Title"] = "Add a new actor";
+}
+
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h1>Add a New Actor</h1>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger">
+                        <!-- Validation summary will display model-level validation errors -->
+                    </div>
+
+                    <!-- Profile picture preview -->
+                    <div class="form-group text-center">
+                        <img class="border-info rounded-circle" style="max-width:150px" id="ProfilePicturePreview" />
+                    </div>
+
+                    <!-- Profile picture URL input -->
+                    <div class="form-group">
+                        <label asp-for="ProfilePictureURL" class="control-label"></label>
+                        <input asp-for="ProfilePictureURL" class="form-control" />
+                        <span asp-validation-for="ProfilePictureURL" class="text-danger"></span>
+                        <!-- Validation message for ProfilePictureURL -->
+                    </div>
+
+                    <!-- Full name input -->
+                    <div class="form-group">
+                        <label asp-for="FullName" class="control-label"></label>
+                        <input asp-for="FullName" class="form-control" />
+                        <span asp-validation-for="FullName" class="text-danger"></span>
+                        <!-- Validation message for FullName -->
+                    </div>
+
+                    <!-- Bio input -->
+                    <div class="form-group">
+                        <label asp-for="Bio" class="control-label"></label>
+                        <input asp-for="Bio" class="form-control" />
+                        <span asp-validation-for="Bio" class="text-danger"></span>
+                        <!-- Validation message for Bio -->
+                    </div>
+
+                    <!-- Submit button -->
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-outline-success float-end" />
+                        <!-- Submit button for form submission -->
+                        <a class="btn btn-outline-secondary" asp-action="Index">Show all</a>
+                        <!-- Button to navigate to Index action -->
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+@*
+Preview js code *@
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var output = document.getElementById('ProfilePicturePreview');
+            output.src = $("#ProfilePictureURL").val();
+        });
+
+        $("#ProfilePictureURL").on("change", function () {
+            var output = document.getElementById('ProfilePicturePreview');
+            output.src = $(this).val();
+        });
+    </script>
+}
+

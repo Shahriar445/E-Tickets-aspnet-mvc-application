@@ -1,4 +1,4 @@
-namespace E_Tickets.Models
+﻿namespace E_Tickets.Models
 {
     public class ErrorViewModel
     {
